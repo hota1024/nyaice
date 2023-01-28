@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* eslint-disable no-console */
 const chalk = require('chalk');
 const cli = require('cac')('nyaice');
@@ -29,7 +30,6 @@ const SCRATCH_PROJECT_ID_REGEXP = /^(\d+)/;
 const TMP_DIR = path.join(__dirname, 'tmp');
 
 const main = async () => {
-    // await fs.rmdir(TMP_DIR, {recursive: true, force: true});
     await fs.rm(TMP_DIR, {recursive: true}).catch(() => {});
     await fs.mkdir(TMP_DIR);
 
@@ -39,9 +39,15 @@ const main = async () => {
         return;
     }
 
+    const selector = parsed.args[0];
+
+    if (typeof selector === 'undefined') {
+        console.log(chalk.red`[error] no project specified(use --help for help)`);
+        process.exit();
+    }
+
     console.log(chalk.yellow`===== nyaice v${pkg.version} =====`);
 
-    const selector = parsed.args[0];
     let id = null;
     let title = 'unknown';
     let projectJson = null;
