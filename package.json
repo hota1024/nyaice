@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/hota1024/nyaice.git"
   },
+  "bin": {
+    "nyaice": "cli/main.js"
+  },
   "main": "./dist/scratch-gui.js",
   "scripts": {
     "build": "npm run clean && webpack --colors --bail",
