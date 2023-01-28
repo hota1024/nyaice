@@ -12,6 +12,14 @@ const reducer = function (state, action) {
     if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case SET_FULL_SCREEN:
+        // eslint-disable-next-line no-case-declarations
+        const params = new URLSearchParams(location.search);
+        if (action.isFullScreen) {
+            params.delete('editor');
+        } else {
+            params.set('editor', 'true');
+        }
+        history.replaceState(null, null, `/${location.hash}${params}`);
         return Object.assign({}, state, {
             isFullScreen: action.isFullScreen
         });

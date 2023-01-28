@@ -80,6 +80,8 @@ export default appTarget => {
                 backpackHost={backpackHost}
                 canSave={false}
                 onClickLogo={onClickLogo}
+                isPlayerOnly={!(new URLSearchParams(location.search)).has('editor')}
+                isFullScreen={!(new URLSearchParams(location.search)).has('editor')}
             />,
         appTarget);
 };
